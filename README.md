@@ -51,3 +51,10 @@ func main() {
     fmt.Println("Predictions:", predictions)
 }
 ```
+
+## Todo
+
+- [x] Decision Tree Classifier
+- [] Decision Tree Regressor
+- [] Random Forest
+- [] Gradient Boost Regression Trees
