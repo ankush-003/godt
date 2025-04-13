@@ -2,6 +2,9 @@
 
 A high-performance implementation of tree-based machine learning algorithms in Go. This repository aims to provide efficient implementations of common decision tree algorithms and gradient boosting frameworks for machine learning applications.
 
+![gopher with tree](https://github.com/user-attachments/assets/117bdabc-007d-4fd8-a4aa-264a310e29f9)
+
+
 ## Installation 🚀
 
 To install the Go Decision Trees library, you can use the following command:
