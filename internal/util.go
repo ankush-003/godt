@@ -49,3 +49,19 @@ func CalculateMajority(data []Row, col int) float32 {
 	}
 	return majorityValue
 }
+
+func CalculateClassifierAccuracy(
+	data Data,
+	predictions []float32,
+	target int,
+) float32 {
+	correctPredictions := data.RangeOverRow(func(i int, data *Row) *Row {
+		if data.Features[target] == predictions[i] {
+			return data
+		}
+		return nil
+	})
+
+	totalCount := correctPredictions.Size()
+	return float32(totalCount) / float32(data.Size())
+}

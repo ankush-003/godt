@@ -84,18 +84,13 @@ func (d *Data) DataWithRows(rows []Row) Data {
 	}
 }
 
-func (d *Data) RangeOverCol(col int, f func(*Row) *Row) Data {
+func (d *Data) RangeOverRow(f func(idx int, r *Row) *Row) Data {
 	res := Data{
 		Headers: d.Headers,
 		Rows:    make([]Row, 0),
 	}
-	for _, feature := range d.Rows {
-		newRow := &Row{
-			Features: feature.Features,
-			Value:    feature.Value,
-			Pred:     feature.Pred,
-		}
-		if updatedRow := f(newRow); updatedRow != nil {
+	for idx, feature := range d.Rows {
+		if updatedRow := f(idx, &feature); updatedRow != nil {
 			res.Rows = append(res.Rows, *updatedRow)
 		}
 	}

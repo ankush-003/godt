@@ -87,13 +87,13 @@ func (d *DTNode) FindBestSplitForColumn(column int) *FeatureSplitInfo {
 		Gain: 0.0,
 	}
 	for feature, _ := range uniqueMap {
-		left := data.RangeOverCol(column, func(row *internal.Row) *internal.Row {
+		left := data.RangeOverRow(func(i int, row *internal.Row) *internal.Row {
 			if row.Features[column] <= feature {
 				return row
 			}
 			return nil
 		})
-		right := data.RangeOverCol(column, func(row *internal.Row) *internal.Row {
+		right := data.RangeOverRow(func(i int, row *internal.Row) *internal.Row {
 			if row.Features[column] > feature {
 				return row
 			}
@@ -205,6 +205,10 @@ func (d *DTNode) Traverse(
 	if d.IsLeaf() {
 		return d.NodeMajority()
 	}
+	log.Info().
+		Int("Feature", d.Node.Feature).
+		Float32("Criterion", d.Node.Criterion).
+		Msg("Treaversing Node")
 	if row.Features[d.Node.Feature] <= d.Node.Criterion {
 		return d.Node.Children[0].Traverse(row)
 	}

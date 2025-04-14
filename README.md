@@ -58,6 +58,7 @@ func main() {
 ## Todo
 
 - [x] Decision Tree Classifier
-- [] Decision Tree Regressor
-- [] Random Forest
-- [] Gradient Boost Regression Trees
+- [ ] Decision Tree Regressor
+- [ ] Training Optimisation
+- [ ] Random Forest
+- [ ] Gradient Boost Regression Trees
