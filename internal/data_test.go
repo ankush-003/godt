@@ -31,3 +31,25 @@ func TestFromCSV(t *testing.T) {
 	assert.Equal(t, 2, len(d.Rows), "Data length should match the number of rows in CSV")
 	assert.Equal(t, float32(1), d.Rows[0].Features[0], "First feature should be 1")
 }
+
+func TestArgSort(t *testing.T) {
+	GenerateNonLinear(10)
+	defer os.Remove("data.csv")
+	d := NewData(10, FromCSV("data.csv"))
+
+	t.Log("Before sorting:")
+	for i := 0; i < len(d.Rows); i++ {
+		t.Log(d.Rows[i].Features[0])
+	}
+
+	row_copy := make([]Row, len(d.Rows))
+	copy(row_copy, d.Rows)
+	sortedIndices := ArgSortRows(row_copy, 0)
+
+	t.Log("After sorting:")
+	t.Log("Sorted Indices:", sortedIndices)
+	for i := 0; i < len(sortedIndices)-1; i++ {
+		t.Log(d.Rows[sortedIndices[i]].Features[0])
+		assert.LessOrEqual(t, d.Rows[sortedIndices[i]].Features[0], d.Rows[sortedIndices[i+1]].Features[0], "Rows should be sorted in ascending order")
+	}
+}
